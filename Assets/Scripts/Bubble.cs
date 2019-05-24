@@ -23,4 +23,26 @@ public class Bubble : IHexagonNetNode
     {
         return Exponent.ToString();
     }
+
+    /// <summary>
+    /// Convenience method for setting the exponent when initializing bubbles.
+    /// </summary>
+    /// <param name="exponent"></param>
+    /// <returns></returns>
+    public Bubble SetExponent(int exponent)
+    {
+        Exponent = exponent;
+        return this;
+    }
+
+    /// <summary>
+    /// Convenience method for setting the HexagonNet when initializing bubbles.
+    /// </summary>
+    /// <param name="exponent"></param>
+    /// <returns></returns>
+    public Bubble SetHexagonNet(object hexagonNet)
+    {
+        HexagonNet = hexagonNet;
+        return this;
+    }
 }

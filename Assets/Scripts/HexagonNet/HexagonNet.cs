@@ -33,6 +33,10 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
         BottomRow = firstRow;
     }
 
+    /// <summary>
+    /// Replaces the TopRow with the newTopRow.
+    /// </summary>
+    /// <param name="newTopRow"></param>
     public void AddTopRow(HexagonNetRow<T> newTopRow)
     {
         if (TopRow == null)
@@ -47,6 +51,10 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
         TopRow = newTopRow;
     }
 
+    /// <summary>
+    /// Replaces the BottomRow with the newBottomRow.
+    /// </summary>
+    /// <param name="newBottomRow"></param>
     public void AddBottomRow(HexagonNetRow<T> newBottomRow)
     {
         if (BottomRow == null)
@@ -72,12 +80,143 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
     }
 
     /// <summary>
+    /// Retrieves the specified neighbour of this node.
+    /// </summary>
+    /// <param name="node"></param>
+    /// <param name="neighbour"></param>
+    /// <returns>The neighbour or null, if no neighbour is found.</returns>
+    public IHexagonNetNode GetNeighbourFor(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
+    {
+        if (node == null) throw new ArgumentException("Cannot find the neigbour for the node that is null!");
+        if (node.Position == null) throw new ArgumentException("The node has to be positioned within the HexagonNet!");
+
+        IHexagonNetNode neighbourNode;
+
+        var row = net[node.Position.Value.x];
+        if (row.Shifted)
+        {
+            neighbourNode = GetNeighbourForShiftedRowNode(node, neighbour);
+        }
+        else
+        {
+            neighbourNode = GetNeighbourForNotShiftedRowNode(node, neighbour);
+        }
+
+        return neighbourNode;
+    }
+
+    private IHexagonNetNode GetNeighbourForShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
+    {
+        IHexagonNetNode neighbourNode = null;
+        var nodePosition = node.Position.Value;
+
+        try
+        {
+            switch (neighbour)
+            {
+                case HexagonNetEnums.NeighbourNode.UpperLeft:
+                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
+                    break;
+                case HexagonNetEnums.NeighbourNode.UpperRight:
+                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y + 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.Left:
+                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y -1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.Right:
+                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.LowerLeft:
+                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
+                    break;
+                case HexagonNetEnums.NeighbourNode.LowerRight:
+                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y + 1];
+                    break;
+            }
+        }
+        catch (IndexOutOfRangeException) 
+        {
+            // Means we are at the border or the row above/below is not yet added
+            // Simply leave the neighbourNode == null;
+        }
+
+        return neighbourNode;
+    }
+
+    private IHexagonNetNode GetNeighbourForNotShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
+    {
+        IHexagonNetNode neighbourNode = null;
+        var nodePosition = node.Position.Value;
+
+        try
+        {
+            switch (neighbour)
+            {
+                case HexagonNetEnums.NeighbourNode.UpperLeft:
+                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y - 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.UpperRight:
+                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
+                    break;
+                case HexagonNetEnums.NeighbourNode.Left:
+                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y - 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.Right:
+                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.LowerLeft:
+                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y - 1];
+                    break;
+                case HexagonNetEnums.NeighbourNode.LowerRight:
+                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Type exType = ex.GetType();
+            if (exType == typeof(IndexOutOfRangeException) || exType == typeof(KeyNotFoundException))
+            {
+                // Means we are at the border or the row above/below is not yet added
+                // Simply leave the neighbourNode == null;
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        return neighbourNode;
+    }
+
+
+    /// <summary>
     /// Set a completely setup row at its Index.
     /// </summary>
     /// <param name="row"></param>
     private void SetCompleteRow(HexagonNetRow<T> row)
     {
+        row.PositionNodesWithinNet();
+
+        foreach (var node in row)
+        {
+            UpdateNeighboursFor(node);
+        }
+
         net.Add(row.Index, row);
+    }
+
+    /// <summary>
+    /// Binds the neighbouring nodes together withing and in-between the HexagonRows.
+    /// </summary>
+    /// <param name="node"></param>
+    private void UpdateNeighboursFor(T node)
+    {
+        // for each neighbour
+        // neighbour = net.GetNeighbourFor
+        // node.neighbour = neigbour
+        // neighbour.oppositeNeighbour = node
+        //throw new NotImplementedException();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
