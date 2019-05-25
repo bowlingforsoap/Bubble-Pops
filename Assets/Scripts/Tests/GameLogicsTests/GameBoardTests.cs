@@ -228,5 +228,29 @@ namespace Tests
 
             Assert.AreEqual(expectedNetToString, net.ToString(), $"Actual HexagonNet as string: {Environment.NewLine}{net.ToString()}");
         }
+
+        [Test]
+        public void GameBoard_MergeBubbles_NoSimilarValid()
+        {
+            // arrange
+            var net = HexagonNetTestHelper.GenerateTestNet3Rows(3, 3, 3, 3, 3, 3,
+                                                                 3, 3, 1, 3, 3, 3,
+                                                                3, 3, 3, 3, 3, 3);
+            var gameBoard = new GameBoard(net);
+
+            var startBubble = net.BottomRow.Nodes[2].GetNeighbour(Neighbours.UpperRight);
+
+            var expectedNetToString =
+                $" 3 3 3 3 3 3{Environment.NewLine}" +
+                $" 3 3 1 3 3 3{Environment.NewLine}" +
+                $" 3 3 3 3 3 3{Environment.NewLine}";
+
+            // act
+            gameBoard.MergeBubbles(startBubble);
+
+            // assert
+
+            Assert.AreEqual(expectedNetToString, net.ToString(), $"Actual HexagonNet as string: {Environment.NewLine}{net.ToString()}");
+        }
     }
 }
