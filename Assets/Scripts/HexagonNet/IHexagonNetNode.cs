@@ -6,7 +6,7 @@ using static HexagonNetEnums;
 public interface IHexagonNetNode<T>
 {
     T Value { get; set; }
-    Vector2Int? Position { get; set; }
+    Vector2Int Position { get; set; }
     IHexagonNetNode<T>[] Neighbours { get; }
     object HexagonNet { get; }
     /// <summary>

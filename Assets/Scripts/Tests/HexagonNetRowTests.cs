@@ -24,7 +24,7 @@ namespace Tests
             foreach (var node in net)
             {
                 actualIndices += " ";
-                actualIndices += node.Position.Value;
+                actualIndices += node.Position;
 
                 nodeCounter++;
                 if (nodeCounter == 6)

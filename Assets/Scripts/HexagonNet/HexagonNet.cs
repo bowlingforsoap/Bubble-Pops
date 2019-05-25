@@ -119,7 +119,7 @@ public class HexagonNet<T> : IEnumerable<IHexagonNetNode<T>> where T : class
 
         try
         {
-            var row = net[node.Position.Value.x];
+            var row = net[node.Position.x];
             if (row.Shifted)
             {
                 neighbourNode = GetNeighbourForShiftedRowNode(node, neighbour);
@@ -150,7 +150,7 @@ public class HexagonNet<T> : IEnumerable<IHexagonNetNode<T>> where T : class
     {
         IHexagonNetNode<T> neighbourNode = null;
 
-        var nodePosition = node.Position.Value;
+        var nodePosition = node.Position;
         switch (neighbour)
         {
             case HexagonNetEnums.Neighbours.UpperLeft:
@@ -179,7 +179,7 @@ public class HexagonNet<T> : IEnumerable<IHexagonNetNode<T>> where T : class
     private IHexagonNetNode<T> GetNeighbourForNotShiftedRowNode(IHexagonNetNode<T> node, HexagonNetEnums.Neighbours neighbour)
     {
         IHexagonNetNode<T> neighbourNode = null;
-        var nodePosition = node.Position.Value;
+        var nodePosition = node.Position;
 
         switch (neighbour)
         {
@@ -213,10 +213,24 @@ public class HexagonNet<T> : IEnumerable<IHexagonNetNode<T>> where T : class
     /// <param name="row"></param>
     private void SetCompleteRow(HexagonNetRow<T> row)
     {
-        row.PositionNodesWithinNet();
+        PositionNodesWithinNet(row);
         net.Add(row.Index, row);
 
         UpdateNeighboursForAllNodes(row);
+    }
+
+    /// <summary>
+    /// Position nodes of the given row within the net by assigning them a correct IHexagonNetRow.Position index.
+    /// </summary>
+    public void PositionNodesWithinNet(HexagonNetRow<T> row)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (row.Nodes[i] != null)
+            {
+                row.Nodes[i].Position = new Vector2Int(row.Index, i);
+            }
+        }
     }
 
     /// <summary>

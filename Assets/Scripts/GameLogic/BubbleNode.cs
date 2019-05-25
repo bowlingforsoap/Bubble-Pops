@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BubbleNode : IHexagonNetNode<Bubble>
 {
-    public Vector2Int? Position
+    public Vector2Int Position
     {
         get;
         set;
@@ -36,6 +36,8 @@ public class BubbleNode : IHexagonNetNode<Bubble>
     {
         Value = BubblePool.Instance.Get(exponent);
     }
+
+    public BubbleNode() : this(null) { }
 
     /// <summary>
     /// Convenience method for setting the HexagonNet when initializing bubbles.

@@ -23,6 +23,14 @@ public class Bubble
         Exponent = exponent;
     }
 
+    internal void MergeWith(int v)
+    {
+        for (int i = 0; i < v; i++)
+        {
+            Exponent++;
+        }
+    }
+
     /// <summary>
     /// Convenience method for setting the exponent when initializing bubbles.
     /// </summary>
