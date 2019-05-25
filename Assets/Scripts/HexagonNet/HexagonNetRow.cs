@@ -32,7 +32,10 @@ public class HexagonNetRow<T> : IEnumerable<T> where T : class, IHexagonNetNode
     {
         for (int i = 0; i < 6; i++)
         {
-            Nodes[i].Position = new Vector2Int(Index, i);
+            if (Nodes[i] != null)
+            {
+                Nodes[i].Position = new Vector2Int(Index, i);
+            }
         }
     }
 

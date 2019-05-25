@@ -14,12 +14,12 @@ namespace Tests
         public void HexagonNetEnums_ConversionNeighbourToOpposite_Correct()
         {
             // arrange
-            var upperLeftNeighbour = NeighbourNode.UpperLeft;
-            var upperRightNeighbour = NeighbourNode.UpperRight;
-            var leftNeighbour = NeighbourNode.Left;
-            var rightNeighbour = NeighbourNode.Right;
-            var lowerLeftNeighbour = NeighbourNode.LowerLeft;
-            var lowerRightNeighbour = NeighbourNode.LowerRight;
+            var upperLeftNeighbour = Neighbours.UpperLeft;
+            var upperRightNeighbour = Neighbours.UpperRight;
+            var leftNeighbour = Neighbours.Left;
+            var rightNeighbour = Neighbours.Right;
+            var lowerLeftNeighbour = Neighbours.LowerLeft;
+            var lowerRightNeighbour = Neighbours.LowerRight;
 
             // act
             var upperLeftNeighbourOpposite = GetOppositeNeighbourNode(upperLeftNeighbour);
@@ -30,24 +30,24 @@ namespace Tests
             var lowerRightNeighbourOpposite = GetOppositeNeighbourNode(lowerRightNeighbour);
 
             // assert
-            Assert.AreEqual(OppositeNeighbourNode.LowerRight, upperLeftNeighbourOpposite);
-            Assert.AreEqual(OppositeNeighbourNode.LowerLeft, upperRightNeighbourOpposite);
-            Assert.AreEqual(OppositeNeighbourNode.Right, leftNeighbourOpposite);
-            Assert.AreEqual(OppositeNeighbourNode.Left, rightNeighbourOpposite);
-            Assert.AreEqual(OppositeNeighbourNode.UpperRight, lowerLeftNeighbourOpposite);
-            Assert.AreEqual(OppositeNeighbourNode.UpperLeft, lowerRightNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.LowerRight, upperLeftNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.LowerLeft, upperRightNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.Right, leftNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.Left, rightNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.UpperRight, lowerLeftNeighbourOpposite);
+            Assert.AreEqual(OppositeNeighbours.UpperLeft, lowerRightNeighbourOpposite);
         }
 
         [Test]
         public void HexagonNetEnums_ConversionOppositeToNeighbour_Correct()
         {
             // arrange
-            var upperLeftNeighbour = OppositeNeighbourNode.UpperLeft;
-            var upperRightNeighbour = OppositeNeighbourNode.UpperRight;
-            var leftNeighbour = OppositeNeighbourNode.Left;
-            var rightNeighbour = OppositeNeighbourNode.Right;
-            var lowerLeftNeighbour = OppositeNeighbourNode.LowerLeft;
-            var lowerRightNeighbour = OppositeNeighbourNode.LowerRight;
+            var upperLeftNeighbour = OppositeNeighbours.UpperLeft;
+            var upperRightNeighbour = OppositeNeighbours.UpperRight;
+            var leftNeighbour = OppositeNeighbours.Left;
+            var rightNeighbour = OppositeNeighbours.Right;
+            var lowerLeftNeighbour = OppositeNeighbours.LowerLeft;
+            var lowerRightNeighbour = OppositeNeighbours.LowerRight;
 
             // act
             var upperLeftNeighbourOpposite = GetOppositeNeighbourNode(upperLeftNeighbour);
@@ -58,12 +58,12 @@ namespace Tests
             var lowerRightNeighbourOpposite = GetOppositeNeighbourNode(lowerRightNeighbour);
 
             // assert
-            Assert.AreEqual(NeighbourNode.LowerRight, upperLeftNeighbourOpposite);
-            Assert.AreEqual(NeighbourNode.LowerLeft, upperRightNeighbourOpposite);
-            Assert.AreEqual(NeighbourNode.Right, leftNeighbourOpposite);
-            Assert.AreEqual(NeighbourNode.Left, rightNeighbourOpposite);
-            Assert.AreEqual(NeighbourNode.UpperRight, lowerLeftNeighbourOpposite);
-            Assert.AreEqual(NeighbourNode.UpperLeft, lowerRightNeighbourOpposite);
+            Assert.AreEqual(Neighbours.LowerRight, upperLeftNeighbourOpposite);
+            Assert.AreEqual(Neighbours.LowerLeft, upperRightNeighbourOpposite);
+            Assert.AreEqual(Neighbours.Right, leftNeighbourOpposite);
+            Assert.AreEqual(Neighbours.Left, rightNeighbourOpposite);
+            Assert.AreEqual(Neighbours.UpperRight, lowerLeftNeighbourOpposite);
+            Assert.AreEqual(Neighbours.UpperLeft, lowerRightNeighbourOpposite);
         }
     }
 }

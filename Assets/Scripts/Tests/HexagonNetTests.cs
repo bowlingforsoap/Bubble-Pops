@@ -123,12 +123,12 @@ namespace Tests
             var secondNodeMiddleRow = middleRow.Nodes[1];
 
             // act
-            var secondNodeMiddleRow_LowerLeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.LowerLeft);
-            var secondNodeMiddleRow_LowerRightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.LowerRight);
-            var secondNodeMiddleRow_LeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.Left);
-            var secondNodeMiddleRow_RightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.Right);
-            var secondNodeMiddleRow_UpperLeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.UpperLeft);
-            var secondNodeMiddleRow_UpperRightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.NeighbourNode.UpperRight);
+            var secondNodeMiddleRow_LowerLeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.LowerLeft);
+            var secondNodeMiddleRow_LowerRightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.LowerRight);
+            var secondNodeMiddleRow_LeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.Left);
+            var secondNodeMiddleRow_RightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.Right);
+            var secondNodeMiddleRow_UpperLeftNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.UpperLeft);
+            var secondNodeMiddleRow_UpperRightNeighbour = (Bubble)net.GetNeighbourFor(secondNodeMiddleRow, HexagonNetEnums.Neighbours.UpperRight);
 
             // assert
             Assert.AreEqual(13, secondNodeMiddleRow_LowerLeftNeighbour.Exponent, $"HexagonNet as string: {Environment.NewLine}{net.ToString()}");
@@ -186,12 +186,12 @@ namespace Tests
             var secondNodeMiddleRow = middleRow.Nodes[1];
 
             // act
-            var secondNodeMiddleRow_LowerLeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.LowerLeft];
-            var secondNodeMiddleRow_LowerRightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.LowerRight];
-            var secondNodeMiddleRow_LeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.Left];
-            var secondNodeMiddleRow_RightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.Right];
-            var secondNodeMiddleRow_UpperLeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.UpperLeft];
-            var secondNodeMiddleRow_UpperRightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.NeighbourNode.UpperRight];
+            var secondNodeMiddleRow_LowerLeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.LowerLeft];
+            var secondNodeMiddleRow_LowerRightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.LowerRight];
+            var secondNodeMiddleRow_LeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.Left];
+            var secondNodeMiddleRow_RightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.Right];
+            var secondNodeMiddleRow_UpperLeftNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.UpperLeft];
+            var secondNodeMiddleRow_UpperRightNeighbour = (Bubble)secondNodeMiddleRow.Neighbours[(int)HexagonNetEnums.Neighbours.UpperRight];
 
             // assert
             // assert

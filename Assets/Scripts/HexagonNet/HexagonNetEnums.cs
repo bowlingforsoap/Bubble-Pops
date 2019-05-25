@@ -5,7 +5,7 @@ using System;
 
 public static class HexagonNetEnums
 {
-    public enum NeighbourNode
+    public enum Neighbours
     {
         UpperLeft,
         UpperRight,
@@ -15,7 +15,7 @@ public static class HexagonNetEnums
         LowerRight
     }
 
-    public enum OppositeNeighbourNode
+    public enum OppositeNeighbours
     {
         LowerRight,
         LowerLeft,
@@ -25,14 +25,14 @@ public static class HexagonNetEnums
         UpperLeft
     }
 
-    public static OppositeNeighbourNode GetOppositeNeighbourNode(NeighbourNode node)
+    public static OppositeNeighbours GetOppositeNeighbourNode(Neighbours node)
     {
-        OppositeNeighbourNode opposite = (OppositeNeighbourNode)(int)node;
+        OppositeNeighbours opposite = (OppositeNeighbours)node;
         return opposite;
     }
-    public static NeighbourNode GetOppositeNeighbourNode(OppositeNeighbourNode node)
+    public static Neighbours GetOppositeNeighbourNode(OppositeNeighbours node)
     {
-        NeighbourNode opposite = (NeighbourNode)(int)node;
+        Neighbours opposite = (Neighbours)node;
         return opposite;
     }
 }

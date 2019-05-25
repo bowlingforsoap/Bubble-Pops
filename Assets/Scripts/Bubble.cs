@@ -45,4 +45,18 @@ public class Bubble : IHexagonNetNode
         HexagonNet = hexagonNet;
         return this;
     }
+
+    /// <summary>
+    /// Sets the specified neigbour as the neighbourNode, and tries to update the corresponding OppositeNeighbourNode to this.
+    /// </summary>
+    /// <param name="neighbourNode"></param>
+    /// <param name="neighbour"></param>
+    public void SetNeighbour(IHexagonNetNode neighbourNode, HexagonNetEnums.Neighbours neighbour)
+    {
+        Neighbours[(int)neighbour] = neighbourNode;
+        if (neighbourNode != null)
+        {
+            neighbourNode.Neighbours[(int)HexagonNetEnums.GetOppositeNeighbourNode(neighbour)] = this;
+        }
+    }
 }

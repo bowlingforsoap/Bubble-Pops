@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System;
+using static HexagonNetEnums;
 
 /// <summary>
 /// The data structure, which consists of rows of 6 hexagons each. Every odd row is shifted by one postion to the right:
@@ -21,7 +22,7 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
 
     public HexagonNet()
     {
-        
+
     }
 
     private void InitializeNet(HexagonNetRow<T> firstRow)
@@ -85,91 +86,23 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
     /// <param name="node"></param>
     /// <param name="neighbour"></param>
     /// <returns>The neighbour or null, if no neighbour is found.</returns>
-    public IHexagonNetNode GetNeighbourFor(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
+    public IHexagonNetNode GetNeighbourFor(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
     {
         if (node == null) throw new ArgumentException("Cannot find the neigbour for the node that is null!");
         if (node.Position == null) throw new ArgumentException("The node has to be positioned within the HexagonNet!");
 
-        IHexagonNetNode neighbourNode;
-
-        var row = net[node.Position.Value.x];
-        if (row.Shifted)
-        {
-            neighbourNode = GetNeighbourForShiftedRowNode(node, neighbour);
-        }
-        else
-        {
-            neighbourNode = GetNeighbourForNotShiftedRowNode(node, neighbour);
-        }
-
-        return neighbourNode;
-    }
-
-    private IHexagonNetNode GetNeighbourForShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
-    {
         IHexagonNetNode neighbourNode = null;
-        var nodePosition = node.Position.Value;
 
         try
         {
-            switch (neighbour)
+            var row = net[node.Position.Value.x];
+            if (row.Shifted)
             {
-                case HexagonNetEnums.NeighbourNode.UpperLeft:
-                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
-                    break;
-                case HexagonNetEnums.NeighbourNode.UpperRight:
-                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y + 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.Left:
-                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y -1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.Right:
-                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.LowerLeft:
-                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
-                    break;
-                case HexagonNetEnums.NeighbourNode.LowerRight:
-                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y + 1];
-                    break;
+                neighbourNode = GetNeighbourForShiftedRowNode(node, neighbour);
             }
-        }
-        catch (IndexOutOfRangeException) 
-        {
-            // Means we are at the border or the row above/below is not yet added
-            // Simply leave the neighbourNode == null;
-        }
-
-        return neighbourNode;
-    }
-
-    private IHexagonNetNode GetNeighbourForNotShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.NeighbourNode neighbour)
-    {
-        IHexagonNetNode neighbourNode = null;
-        var nodePosition = node.Position.Value;
-
-        try
-        {
-            switch (neighbour)
+            else
             {
-                case HexagonNetEnums.NeighbourNode.UpperLeft:
-                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y - 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.UpperRight:
-                    neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
-                    break;
-                case HexagonNetEnums.NeighbourNode.Left:
-                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y - 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.Right:
-                    neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.LowerLeft:
-                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y - 1];
-                    break;
-                case HexagonNetEnums.NeighbourNode.LowerRight:
-                    neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
-                    break;
+                neighbourNode = GetNeighbourForNotShiftedRowNode(node, neighbour);
             }
         }
         catch (Exception ex)
@@ -189,77 +122,157 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
         return neighbourNode;
     }
 
-
-    /// <summary>
-    /// Set a completely setup row at its Index.
-    /// </summary>
-    /// <param name="row"></param>
-    private void SetCompleteRow(HexagonNetRow<T> row)
+    private IHexagonNetNode GetNeighbourForShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
     {
-        row.PositionNodesWithinNet();
+        IHexagonNetNode neighbourNode = null;
 
+        var nodePosition = node.Position.Value;
+        switch (neighbour)
+        {
+            case HexagonNetEnums.Neighbours.UpperLeft:
+                neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
+                break;
+            case HexagonNetEnums.Neighbours.UpperRight:
+                neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y + 1];
+                break;
+            case HexagonNetEnums.Neighbours.Left:
+                neighbourNode = net[nodePosition.x].Nodes[nodePosition.y - 1];
+                break;
+            case HexagonNetEnums.Neighbours.Right:
+                neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
+                break;
+            case HexagonNetEnums.Neighbours.LowerLeft:
+                neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
+                break;
+            case HexagonNetEnums.Neighbours.LowerRight:
+                neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y + 1];
+                break;
+        }
+
+        return neighbourNode;
+    }
+
+    private IHexagonNetNode GetNeighbourForNotShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
+    {
+        IHexagonNetNode neighbourNode = null;
+        var nodePosition = node.Position.Value;
+
+        switch (neighbour)
+        {
+            case HexagonNetEnums.Neighbours.UpperLeft:
+                neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y - 1];
+                break;
+            case HexagonNetEnums.Neighbours.UpperRight:
+                neighbourNode = net[nodePosition.x - 1].Nodes[nodePosition.y];
+                break;
+            case HexagonNetEnums.Neighbours.Left:
+                neighbourNode = net[nodePosition.x].Nodes[nodePosition.y - 1];
+                break;
+            case HexagonNetEnums.Neighbours.Right:
+                neighbourNode = net[nodePosition.x].Nodes[nodePosition.y + 1];
+                break;
+            case HexagonNetEnums.Neighbours.LowerLeft:
+                neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y - 1];
+                break;
+            case HexagonNetEnums.Neighbours.LowerRight:
+                neighbourNode = net[nodePosition.x + 1].Nodes[nodePosition.y];
+                break;
+        }     
+
+        return neighbourNode;
+    }
+
+
+/// <summary>
+/// Set a completely setup row at its Index.
+/// </summary>
+/// <param name="row"></param>
+private void SetCompleteRow(HexagonNetRow<T> row)
+{
+    row.PositionNodesWithinNet();
+
+    foreach (var node in row)
+    {
+        UpdateNeighboursFor(node);
+    }
+
+    net.Add(row.Index, row);
+}
+
+/// <summary>
+/// Binds the neighbouring nodes together withing and in-between the HexagonRows.
+/// </summary>
+/// <param name="node"></param>
+private void UpdateNeighboursFor(T node)
+{
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.Left);
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.LowerLeft);
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.LowerRight);
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.Right);
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.UpperLeft);
+    UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.UpperRight);
+}
+
+private void UpdateNeighbourFor(T node, Neighbours neighbour)
+{
+        IHexagonNetNode neighbourNode = null;
+        GetNeighbourFor(node, neighbour);
+
+    //if (node != null)
+    //{
+    //    node.SetNeighbour(neighbourNode, neighbour);
+    //} else if (neighbourNode != null)
+    //{
+    //    // Find which neighbour from Neighbours is this node for the neighbourNode
+    //    var oppositeNeighbour = GetOppositeNeighbourNode(neighbour);
+    //    Neighbours neighbourForOppositeNode;
+    //    Enum.TryParse(oppositeNeighbour.ToString(), out neighbourForOppositeNode);
+       
+    //    neighbourNode.SetNeighbour(node, neighbourForOppositeNode);
+    //}
+}
+
+IEnumerator IEnumerable.GetEnumerator()
+{
+    return GetEnumerator();
+}
+
+public IEnumerator<T> GetEnumerator()
+{
+    foreach (var row in net.Values)
+    {
         foreach (var node in row)
         {
-            UpdateNeighboursFor(node);
+            yield return node;
         }
-
-        net.Add(row.Index, row);
     }
+}
 
-    /// <summary>
-    /// Binds the neighbouring nodes together withing and in-between the HexagonRows.
-    /// </summary>
-    /// <param name="node"></param>
-    private void UpdateNeighboursFor(T node)
-    {
-        // for each neighbour
-        // neighbour = net.GetNeighbourFor
-        // node.neighbour = neigbour
-        // neighbour.oppositeNeighbour = node
-        //throw new NotImplementedException();
-    }
+public override string ToString()
+{
+    StringBuilder netAsString = new StringBuilder();
 
-    IEnumerator IEnumerable.GetEnumerator()
+    int i = 0;
+    foreach (var node in this)
     {
-        return GetEnumerator();
-    }
-
-    public IEnumerator<T> GetEnumerator()
-    {
-        foreach (var row in net.Values)
+        netAsString.Append(" ");
+        if (node == null)
         {
-            foreach (var node in row)
-            {
-                yield return node;
-            }
+            netAsString.Append("null");
         }
-    }
-
-    public override string ToString()
-    {
-        StringBuilder netAsString = new StringBuilder();
-
-        int i = 0;
-        foreach (var node in this)
+        else
         {
-            netAsString.Append(" ");
-            if (node == null)
-            {
-                netAsString.Append("null");
-            }
-            else
-            {
-                netAsString.Append(node);
-            }
-
-            i++;
-            if (i == 6)
-            {
-                netAsString.Append(Environment.NewLine);
-                i = 0;
-            }
+            netAsString.Append(node);
         }
 
-        return netAsString.ToString();
+        i++;
+        if (i == 6)
+        {
+            netAsString.Append(Environment.NewLine);
+            i = 0;
+        }
     }
+
+    return netAsString.ToString();
+}
 }
