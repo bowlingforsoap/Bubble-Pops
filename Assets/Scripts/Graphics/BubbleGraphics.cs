@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,12 +7,13 @@ using UnityEngine.UI;
 /// <summary>
 /// Graphical representation of a Bubble.
 /// </summary>
-public class BubbleGraphics : MonoBehaviour
+public class BubbleGraphics : MonoBehaviour, IGameObjectPooled<BubbleGraphics>
 {
     public SpriteRenderer bubbleCenterRenderer;
     public Text bubbleValueText;
 
     public Bubble Bubble { get; set; }
+    public GameObjectPool<BubbleGraphics> Pool { get; set; }
 
     public Color[] exponentColors;
 
@@ -21,7 +23,12 @@ public class BubbleGraphics : MonoBehaviour
 
     public void SyncGraphicsWithBubble()
     {
-        bubbleCenterRenderer.color = exponentColors[Bubble.Exponent];
+        bubbleCenterRenderer.color = exponentColors[Bubble.Exponent - 1];
         bubbleValueText.text = Bubble.Value.ToString();
+    }
+
+    public void SetPosition(Vector3 bubbleGraphicsPosition)
+    {
+        transform.position = bubbleGraphicsPosition;
     }
 }

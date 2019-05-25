@@ -8,10 +8,32 @@ public class GameBoard
 {
     protected HexagonNet<Bubble> net;
 
+    public HexagonNet<Bubble> Net
+    {
+        get => net;
+        set
+        {
+            if (net == null)
+            {
+                net = value;
+
+                if (BubblesAddedEvent != null)
+                {
+                    BubbleEventArgs bubbleEventArgs = new BubbleEventArgs().SetBubbleNodes(net);
+                    BubblesAddedEvent(this, bubbleEventArgs);
+                }
+            }
+        }
+    }
+
+    public event EventHandler<BubbleEventArgs> BubblesAddedEvent;
+
     public GameBoard(HexagonNet<Bubble> net)
     {
-        this.net = net;
+        Net = net;
     }
+
+    public GameBoard() { }
 
     /// <summary>
     /// Merges the bubbles with the same exponent into one.
