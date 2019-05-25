@@ -1,18 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class Bubble : IHexagonNetNode
+public class Bubble
 {
-    public Vector2Int? Position
-    {
-        get;
-        set;
-    }
-
-    public IHexagonNetNode[] Neighbours { get; } = new IHexagonNetNode[6];
-
-    public object HexagonNet { get; set; }
     public int Exponent { get; set; }
     public int Value
     {
@@ -24,6 +18,11 @@ public class Bubble : IHexagonNetNode
         return Exponent.ToString();
     }
 
+    public Bubble(int exponent)
+    {
+        Exponent = exponent;
+    }
+
     /// <summary>
     /// Convenience method for setting the exponent when initializing bubbles.
     /// </summary>
@@ -33,30 +32,5 @@ public class Bubble : IHexagonNetNode
     {
         Exponent = exponent;
         return this;
-    }
-
-    /// <summary>
-    /// Convenience method for setting the HexagonNet when initializing bubbles.
-    /// </summary>
-    /// <param name="exponent"></param>
-    /// <returns></returns>
-    public Bubble SetHexagonNet(object hexagonNet)
-    {
-        HexagonNet = hexagonNet;
-        return this;
-    }
-
-    /// <summary>
-    /// Sets the specified neigbour as the neighbourNode, and tries to update the corresponding OppositeNeighbourNode to this.
-    /// </summary>
-    /// <param name="neighbourNode"></param>
-    /// <param name="neighbour"></param>
-    public void SetNeighbour(IHexagonNetNode neighbourNode, HexagonNetEnums.Neighbours neighbour)
-    {
-        Neighbours[(int)neighbour] = neighbourNode;
-        if (neighbourNode != null)
-        {
-            neighbourNode.Neighbours[(int)HexagonNetEnums.GetOppositeNeighbourNode(neighbour)] = this;
-        }
     }
 }

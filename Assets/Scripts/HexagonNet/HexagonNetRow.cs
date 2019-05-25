@@ -7,13 +7,13 @@ using System;
 /// Represents one row in HexagonNet.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class HexagonNetRow<T> : IEnumerable<T> where T : class, IHexagonNetNode
+public class HexagonNetRow<T> : IEnumerable<IHexagonNetNode<T>> where T : class
 {
     public bool Shifted { get; set; }
-    public T[] Nodes { get; private set; } = new T[6];
+    public IHexagonNetNode<T>[] Nodes { get; private set; } = new IHexagonNetNode<T>[6];
     public int Index { get; set; }
 
-    public HexagonNetRow(bool shifted, T[] nodes)
+    public HexagonNetRow(bool shifted, IHexagonNetNode<T>[] nodes)
     {
         Shifted = shifted;
 
@@ -23,7 +23,7 @@ public class HexagonNetRow<T> : IEnumerable<T> where T : class, IHexagonNetNode
         }
     }
 
-    public HexagonNetRow(T[] nodes) : this(false, nodes) { }
+    public HexagonNetRow(IHexagonNetNode<T>[] nodes) : this(false, nodes) { }
 
     /// <summary>
     /// Used to set the position of each node, when the row is fully setup (has an Index).
@@ -39,9 +39,12 @@ public class HexagonNetRow<T> : IEnumerable<T> where T : class, IHexagonNetNode
         }
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public IEnumerator<IHexagonNetNode<T>> GetEnumerator()
     {
-        return ((IEnumerable<T>)Nodes).GetEnumerator();
+        foreach (var node in Nodes)
+        {
+            yield return node;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()

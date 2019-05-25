@@ -16,8 +16,8 @@ public class BubblePool
         Instance = this;
     }
 
-    public Bubble Get()
+    public Bubble Get(int exponent)
     {
-        return new Bubble();
+        return new Bubble(exponent);
     }
 }

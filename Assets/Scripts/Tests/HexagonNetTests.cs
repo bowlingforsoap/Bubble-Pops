@@ -15,40 +15,40 @@ namespace Tests
             // arrange
             HexagonNet<Bubble> net = new HexagonNet<Bubble>();
 
-            var bubblesForTopRow = new Bubble[]
+            var bubblesForTopRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(-1).SetHexagonNet(net)
+                new BubbleNode(-1).SetHexagonNet(net),
+                new BubbleNode(-1).SetHexagonNet(net),
+                new BubbleNode(-1).SetHexagonNet(net),
+                new BubbleNode(-1).SetHexagonNet(net),
+                new BubbleNode(-1).SetHexagonNet(net),
+                new BubbleNode(-1).SetHexagonNet(net)
             };
             var topRow = new HexagonNetRow<Bubble>(bubblesForTopRow);
 
-            var bubblesForMiddleRow = new Bubble[]
+            var bubblesForMiddleRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net)
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(0).SetHexagonNet(net)
             };
             var middleRow = new HexagonNetRow<Bubble>(bubblesForMiddleRow);
 
-            var bubblesForLowerMiddleRow = new Bubble[]
+            var bubblesForLowerMiddleRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net)
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net)
             };
             var lowerMiddleRow = new HexagonNetRow<Bubble>(bubblesForLowerMiddleRow);
 
-            var bubblesForBottomRow = new Bubble[]
+            var bubblesForBottomRow = new BubbleNode[]
             {
                 null,
                 null,
@@ -83,36 +83,36 @@ namespace Tests
             // arrange
             HexagonNet<Bubble> net = new HexagonNet<Bubble>();
 
-            var bubblesForTopRow = new Bubble[]
+            var bubblesForTopRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(2).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(3).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(4).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(5).SetHexagonNet(net)
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(2).SetHexagonNet(net),
+                new BubbleNode(3).SetHexagonNet(net),
+                new BubbleNode(4).SetHexagonNet(net),
+                new BubbleNode(5).SetHexagonNet(net)
             };
             var topRow = new HexagonNetRow<Bubble>(bubblesForTopRow);
 
-            var bubblesForMiddleRow = new Bubble[]
+            var bubblesForMiddleRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(6).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(7).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(8).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(9).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(10).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(11).SetHexagonNet(net)
+                new BubbleNode(6).SetHexagonNet(net),
+                new BubbleNode(7).SetHexagonNet(net),
+                new BubbleNode(8).SetHexagonNet(net),
+                new BubbleNode(9).SetHexagonNet(net),
+                new BubbleNode(10).SetHexagonNet(net),
+                new BubbleNode(11).SetHexagonNet(net)
             };
             var middleRow = new HexagonNetRow<Bubble>(bubblesForMiddleRow);
 
-            var bubblesForBottomRow = new Bubble[]
+            var bubblesForBottomRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(12).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(13).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(14).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(15).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(16).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(17).SetHexagonNet(net)
+                new BubbleNode(12).SetHexagonNet(net),
+                new BubbleNode(13).SetHexagonNet(net),
+                new BubbleNode(14).SetHexagonNet(net),
+                new BubbleNode(15).SetHexagonNet(net),
+                new BubbleNode(16).SetHexagonNet(net),
+                new BubbleNode(17).SetHexagonNet(net)
             };
             var bottomRow = new HexagonNetRow<Bubble>(bubblesForBottomRow);
 
@@ -146,36 +146,36 @@ namespace Tests
             // arrange
             HexagonNet<Bubble> net = new HexagonNet<Bubble>();
 
-            var bubblesForTopRow = new Bubble[]
+            var bubblesForTopRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(0).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(1).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(2).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(3).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(4).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(5).SetHexagonNet(net)
+                new BubbleNode(0).SetHexagonNet(net),
+                new BubbleNode(1).SetHexagonNet(net),
+                new BubbleNode(2).SetHexagonNet(net),
+                new BubbleNode(3).SetHexagonNet(net),
+                new BubbleNode(4).SetHexagonNet(net),
+                new BubbleNode(5).SetHexagonNet(net)
             };
             var topRow = new HexagonNetRow<Bubble>(bubblesForTopRow);
 
-            var bubblesForMiddleRow = new Bubble[]
+            var bubblesForMiddleRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(6).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(7).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(8).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(9).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(10).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(11).SetHexagonNet(net)
+                new BubbleNode(6).SetHexagonNet(net),
+                new BubbleNode(7).SetHexagonNet(net),
+                new BubbleNode(8).SetHexagonNet(net),
+                new BubbleNode(9).SetHexagonNet(net),
+                new BubbleNode(10).SetHexagonNet(net),
+                new BubbleNode(11).SetHexagonNet(net)
             };
             var middleRow = new HexagonNetRow<Bubble>(bubblesForMiddleRow);
 
-            var bubblesForBottomRow = new Bubble[]
+            var bubblesForBottomRow = new BubbleNode[]
             {
-                BubblePool.Instance.Get().SetExponent(12).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(13).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(14).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(15).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(16).SetHexagonNet(net),
-                BubblePool.Instance.Get().SetExponent(17).SetHexagonNet(net)
+                new BubbleNode(12).SetHexagonNet(net),
+                new BubbleNode(13).SetHexagonNet(net),
+                new BubbleNode(14).SetHexagonNet(net),
+                new BubbleNode(15).SetHexagonNet(net),
+                new BubbleNode(16).SetHexagonNet(net),
+                new BubbleNode(17).SetHexagonNet(net)
             };
             var bottomRow = new HexagonNetRow<Bubble>(bubblesForBottomRow);
 

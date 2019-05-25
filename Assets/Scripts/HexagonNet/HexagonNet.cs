@@ -14,7 +14,7 @@ using static HexagonNetEnums;
 ///  ... and so on ...
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
+public class HexagonNet<T> : IEnumerable<IHexagonNetNode<T>> where T : class
 {
     private SortedDictionary<int, HexagonNetRow<T>> net = new SortedDictionary<int, HexagonNetRow<T>>();
     public HexagonNetRow<T> TopRow { get; protected set; }
@@ -86,12 +86,12 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
     /// <param name="node"></param>
     /// <param name="neighbour"></param>
     /// <returns>The neighbour or null, if no neighbour is found.</returns>
-    public IHexagonNetNode GetNeighbourFor(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
+    public IHexagonNetNode<T> GetNeighbourFor(IHexagonNetNode<T> node, HexagonNetEnums.Neighbours neighbour)
     {
         if (node == null) throw new ArgumentException("Cannot find the neigbour for the node that is null!");
         if (node.Position == null) throw new ArgumentException("The node has to be positioned within the HexagonNet!");
 
-        IHexagonNetNode neighbourNode = null;
+        IHexagonNetNode<T> neighbourNode = null;
 
         try
         {
@@ -122,9 +122,9 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
         return neighbourNode;
     }
 
-    private IHexagonNetNode GetNeighbourForShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
+    private IHexagonNetNode<T> GetNeighbourForShiftedRowNode(IHexagonNetNode<T> node, HexagonNetEnums.Neighbours neighbour)
     {
-        IHexagonNetNode neighbourNode = null;
+        IHexagonNetNode<T> neighbourNode = null;
 
         var nodePosition = node.Position.Value;
         switch (neighbour)
@@ -152,9 +152,9 @@ public class HexagonNet<T> : IEnumerable<T> where T : class, IHexagonNetNode
         return neighbourNode;
     }
 
-    private IHexagonNetNode GetNeighbourForNotShiftedRowNode(IHexagonNetNode node, HexagonNetEnums.Neighbours neighbour)
+    private IHexagonNetNode<T> GetNeighbourForNotShiftedRowNode(IHexagonNetNode<T> node, HexagonNetEnums.Neighbours neighbour)
     {
-        IHexagonNetNode neighbourNode = null;
+        IHexagonNetNode<T> neighbourNode = null;
         var nodePosition = node.Position.Value;
 
         switch (neighbour)
@@ -203,7 +203,7 @@ private void SetCompleteRow(HexagonNetRow<T> row)
 /// Binds the neighbouring nodes together withing and in-between the HexagonRows.
 /// </summary>
 /// <param name="node"></param>
-private void UpdateNeighboursFor(T node)
+private void UpdateNeighboursFor(IHexagonNetNode<T> node)
 {
     UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.Left);
     UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.LowerLeft);
@@ -213,9 +213,9 @@ private void UpdateNeighboursFor(T node)
     UpdateNeighbourFor(node, HexagonNetEnums.Neighbours.UpperRight);
 }
 
-private void UpdateNeighbourFor(T node, Neighbours neighbour)
+private void UpdateNeighbourFor(IHexagonNetNode<T> node, Neighbours neighbour)
 {
-        IHexagonNetNode neighbourNode = null;
+        IHexagonNetNode<T> neighbourNode = null;
         GetNeighbourFor(node, neighbour);
 
     //if (node != null)
@@ -237,7 +237,7 @@ IEnumerator IEnumerable.GetEnumerator()
     return GetEnumerator();
 }
 
-public IEnumerator<T> GetEnumerator()
+public IEnumerator<IHexagonNetNode<T>> GetEnumerator()
 {
     foreach (var row in net.Values)
     {
