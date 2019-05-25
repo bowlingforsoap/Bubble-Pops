@@ -56,9 +56,26 @@ public class BubbleNode : IHexagonNetNode<Bubble>
     public void SetNeighbour(IHexagonNetNode<Bubble> neighbourNode, HexagonNetEnums.Neighbours neighbour)
     {
         Neighbours[(int)neighbour] = neighbourNode;
-        if (neighbourNode != null)
+        //if (neighbourNode != null)
+        //{
+        //    neighbourNode.Neighbours[(int)HexagonNetEnums.GetOppositeNeighbourNode(neighbour)] = this;
+        //}
+    }
+
+    public override string ToString()
+    {
+        if (Value != null)
         {
-            neighbourNode.Neighbours[(int)HexagonNetEnums.GetOppositeNeighbourNode(neighbour)] = this;
+            return Value.ToString();
         }
+        else
+        {
+            return "null";
+        }
+    }
+
+    public IHexagonNetNode<Bubble> GetNeighbour(HexagonNetEnums.Neighbours neighbour)
+    {
+        return Neighbours[(int)neighbour];
     }
 }

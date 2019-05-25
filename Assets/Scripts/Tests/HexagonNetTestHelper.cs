@@ -19,34 +19,34 @@ namespace Tests
 
             var bubblesForTopRow = new BubbleNode[]
             {
-                new BubbleNode(0).SetHexagonNet(net),
-                new BubbleNode(1).SetHexagonNet(net),
-                new BubbleNode(2).SetHexagonNet(net),
-                new BubbleNode(3).SetHexagonNet(net),
-                new BubbleNode(4).SetHexagonNet(net),
-                new BubbleNode(5).SetHexagonNet(net)
+                new BubbleNode(exponents[0]).SetHexagonNet(net),
+                new BubbleNode(exponents[1]).SetHexagonNet(net),
+                new BubbleNode(exponents[2]).SetHexagonNet(net),
+                new BubbleNode(exponents[3]).SetHexagonNet(net),
+                new BubbleNode(exponents[4]).SetHexagonNet(net),
+                new BubbleNode(exponents[5]).SetHexagonNet(net)
             };
             var topRow = new HexagonNetRow<Bubble>(bubblesForTopRow);
 
             var bubblesForMiddleRow = new BubbleNode[]
             {
-                new BubbleNode(6).SetHexagonNet(net),
-                new BubbleNode(7).SetHexagonNet(net),
-                new BubbleNode(8).SetHexagonNet(net),
-                new BubbleNode(9).SetHexagonNet(net),
-                new BubbleNode(10).SetHexagonNet(net),
-                new BubbleNode(11).SetHexagonNet(net)
+                new BubbleNode(exponents[6]).SetHexagonNet(net),
+                new BubbleNode(exponents[7]).SetHexagonNet(net),
+                new BubbleNode(exponents[8]).SetHexagonNet(net),
+                new BubbleNode(exponents[9]).SetHexagonNet(net),
+                new BubbleNode(exponents[10]).SetHexagonNet(net),
+                new BubbleNode(exponents[11]).SetHexagonNet(net)
             };
             var middleRow = new HexagonNetRow<Bubble>(bubblesForMiddleRow);
 
             var bubblesForBottomRow = new BubbleNode[]
             {
-                new BubbleNode(12).SetHexagonNet(net),
-                new BubbleNode(13).SetHexagonNet(net),
-                new BubbleNode(14).SetHexagonNet(net),
-                new BubbleNode(15).SetHexagonNet(net),
-                new BubbleNode(16).SetHexagonNet(net),
-                new BubbleNode(17).SetHexagonNet(net)
+                new BubbleNode(exponents[12]).SetHexagonNet(net),
+                new BubbleNode(exponents[13]).SetHexagonNet(net),
+                new BubbleNode(exponents[14]).SetHexagonNet(net),
+                new BubbleNode(exponents[15]).SetHexagonNet(net),
+                new BubbleNode(exponents[16]).SetHexagonNet(net),
+                new BubbleNode(exponents[17]).SetHexagonNet(net)
             };
             var bottomRow = new HexagonNetRow<Bubble>(bubblesForBottomRow);
 

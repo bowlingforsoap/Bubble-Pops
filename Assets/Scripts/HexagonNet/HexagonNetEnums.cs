@@ -35,6 +35,13 @@ public static class HexagonNetEnums
         Neighbours opposite = (Neighbours)node;
         return opposite;
     }
+
+    public static Neighbours GetNeighbourWithSameNameAsOpposite(OppositeNeighbours oppositeNeighbour)
+    {
+        Neighbours neighbour;
+        Enum.TryParse(oppositeNeighbour.ToString(), out neighbour);
+        return neighbour;
+    }
 }
 
 
